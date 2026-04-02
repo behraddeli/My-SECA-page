@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Behrad Delavari's SECA</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: white;
+      padding: 22px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: 0.2s ease;
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.14);
+    }
+    .hero {
+      padding: 80px 5% 70px;
+      background: linear-gradient(180deg, #dbeafe, #f4f7fb);
+    }
+    .hero-box {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin: 0 0 14px;
+      color: #0f172a;
+    }
+    .hero p {
+      font-size: 1.08rem;
+      max-width: 700px;
+      margin-bottom: 22px;
+    }
+    .hero-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.1);
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+    .btn-secondary {
+      background: white;
+      color: #2563eb;
+      border: 2px solid #2563eb;
+    }
+    .btn:hover { transform: translateY(-1px); opacity: 0.95; }
+    main {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 40px 5% 70px;
+    }
+    section {
+      margin-bottom: 64px;
+      scroll-margin-top: 110px;
+    }
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+    .section-subtitle {
+      color: #475569;
+      margin-bottom: 24px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .stat-card, .card, .gallery-item {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #2563eb;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+    }
+    th, td {
+      padding: 14px 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+    th {
+      background: #dbeafe;
+      color: #0f172a;
+      font-size: 0.95rem;
+    }
+    tr:last-child td { border-bottom: none; }
+    .hours-total {
+      margin-top: 14px;
+      font-weight: 700;
+      color: #1d4ed8;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 22px;
+    }
+    .gallery-item {
+      padding: 14px;
+      text-align: center;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .placeholder {
+      width: 100%;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: #e2e8f0;
+      color: #475569;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+      padding: 12px;
+    }
+    footer {
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 24px;
+    }
+    @media (max-width: 900px) {
+      .hero-box,
+      .cards,
+      .stats,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="brand">Behrad Delavari | SECA</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#service">Service</a>
+        <a href="#activities">Activities</a>
+        <a href="#evidence">Evidence</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-box">
+      <div>
+        <h1>Behrad Delavari's SECA</h1>
+        <p>
+          My name is Behrad Delavari. I'm currently studying at The English School of Kyrenia. I have finished my International GCSEs, and I'm currently enrolled in my A levels, of which I have chosen mathematics, physics, and computer science.
+          I am highly interested in travelling, exercising, and reading books related to the field of my studies and financial knowledge, and I also enjoy playing football and volleyball. Since an early age, I have been really passionate about learning how to work with computers, and nowadays, this passion has encouraged me to choose computer science and AI as my field of studies. My aim is not only to achieve this longtime aim of mine but also to try to make a lifelong income out of it, as this field has great potentials.
+        </p>
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#service">View Service Work</a>
+          <a class="btn btn-secondary" href="#activities">View Activities</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Quick Summary</h3>
+        <p><strong>Name:</strong> Behrad Delavari</p>
+        <p><strong>Purpose:</strong> Track SECA hours, achievements, and evidence</p>
+        <p><strong>Target:</strong> 300 service hours + 300 extra-curricular hours</p>
+        <p><strong>Platform:</strong> GitHub Pages</p>
+        <p><strong>Focus:</strong> Building a strong student profile through service, leadership, discipline, and consistent involvement in meaningful activities.</p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        I am a student working to build a strong academic and personal profile through service, leadership, and extra-curricular participation. This website serves as a structured record of the hours I have completed, the projects and events I have taken part in, and the evidence that supports my progress. Beyond simply counting hours, this portfolio reflects my commitment to growth, responsibility, teamwork, and long-term development.
+      </p>
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-number">300</div>
+          <div>Service Hours Goal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">300</div>
+          <div>Activities Hours Goal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">SECA</div>
+          <div>Service & Extra-Curricular Activities</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="service">
+      <h2 class="section-title">Service</h2>
+      <p class="section-subtitle">
+        This section documents the service work I have completed. Each entry includes a short explanation of the activity, the date it took place, and the number of hours contributed. These experiences highlight my willingness to support others, contribute to my community, and take part in meaningful work beyond the classroom.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Activity</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Community Support Example</td>
+            <td>Helped organize and support a school or community service event.</td>
+            <td>DD/MM/YYYY</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>Volunteering Example</td>
+            <td>Participated in volunteer work and contributed to event management.</td>
+            <td>DD/MM/YYYY</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Add More Rows</td>
+            <td>Duplicate this row and replace it with your real service work.</td>
+            <td>DD/MM/YYYY</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="hours-total">Current Service Total: 8 hours</p>
+    </section>
+
+    <section id="activities">
+      <h2 class="section-title">Extra-Curricular Activities</h2>
+      <p class="section-subtitle">
+        This section presents the extra-curricular side of my development, including clubs, competitions, projects, leadership roles, sports, and skill-building experiences. These activities show how I use my time outside normal lessons to improve myself, explore my interests, and gain practical experience in different environments.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Activity</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Club Participation Example</td>
+            <td>Attended and contributed to an organised school club or academic activity.</td>
+            <td>DD/MM/YYYY</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>Competition / Project Example</td>
+            <td>Worked on a project, competition, or leadership activity outside lessons.</td>
+            <td>DD/MM/YYYY</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>Add More Rows</td>
+            <td>Duplicate this row and replace it with your real extra-curricular work.</td>
+            <td>DD/MM/YYYY</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="hours-total">Current Activities Total: 10 hours</p>
+    </section>
+
+    <section id="evidence">
+      <h2 class="section-title">Evidence Gallery</h2>
+      <p class="section-subtitle">
+        The evidence gallery is included to support the entries on this website with visual proof. Screenshots, certificates, event photos, and project images can be added here to show participation, verify achievements, and make the portfolio more credible and complete.
+      </p>
+      <div class="gallery">
+        <div class="gallery-item">
+          <div class="placeholder">Insert Service Evidence Image</div>
+          <strong>Service Evidence 1</strong>
+        </div>
+        <div class="gallery-item">
+          <div class="placeholder">Insert Activity Evidence Image</div>
+          <strong>Activity Evidence 1</strong>
+        </div>
+        <div class="gallery-item">
+          <div class="placeholder">Insert More Evidence</div>
+          <strong>Evidence 2</strong>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">How to Update This Website</h2>
+      <p class="section-subtitle">
+        This final section explains how the website can be updated over time. As I complete more service work and activities, I can edit the tables, upload new evidence, and keep the portfolio current. This makes the website a living record of my progress rather than a one-time project.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <h3>1. Edit the text</h3>
+          <p>Replace the example activities, dates, and hours with your real SECA records.</p>
+        </div>
+        <div class="card">
+          <h3>2. Add images</h3>
+          <p>Upload your evidence images to the same GitHub repository and replace each placeholder with an &lt;img&gt; tag.</p>
+        </div>
+        <div class="card">
+          <h3>3. Update totals</h3>
+          <p>Manually change the current total hours after adding new rows.</p>
+        </div>
+        <div class="card">
+          <h3>4. Publish</h3>
+          <p>Push the file to GitHub and enable GitHub Pages in repository settings.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Behrad Delavari | SECA Portfolio Website</p>
+  </footer>
+</body>
+</html>
